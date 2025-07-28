@@ -9,7 +9,7 @@ from telegram.ext import (
     filters,
     ConversationHandler
 )
-from stream import start_stream, stop_stream, stream_status
+from stream import start_stream, stop_stream
 from utils import extract_info
 from keep_alive import keep_alive
 
