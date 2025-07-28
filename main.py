@@ -48,7 +48,17 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # If everything is valid
     await update.message.reply_text("✅ Starting Stream...")
     current_stream["status"] = True
-    await start_stream(info)
+
+    try:
+        await start_stream(
+            info["stream_key"],
+            info["source"],
+            info["title"],
+            info["loop"]
+        )
+    except Exception as e:
+        current_stream["status"] = False
+        await update.message.reply_text(f"❌ Stream failed to start: {str(e)}")
 
 async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.effective_user.id != OWNER_ID:
